@@ -92,5 +92,7 @@ export default {
 
   .q-drawer .q-router-link--exact-active, .q-footer .q-router-link--exact-active {
     color: white !important;
+    font-weight: 600;
+    text-shadow: 2px 2px rgba(0,0,0,.4);
   }
 </style>
