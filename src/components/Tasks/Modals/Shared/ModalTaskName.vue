@@ -1,18 +1,19 @@
 <template>
   <div class="row q-mb-sm">
     <q-input
-      autofocus
       outlined
       :value="name"
-      label="Task Name"
-      class="col"
+      @input="$emit('update:name', $event)"
+      :rules="[val => !!val || 'Field is required']"
+      autofocus
       ref="name"
-      :rules="[val => !!val || 'Field is required']">
+      label="Task Name"
+      class="col">
       <template v-slot:append>
         <q-icon
+          v-if="name"
+          @click="$emit('update:name', '')"
           name="close"
-          v-if="propName"
-          @click="propName =''"
           class="cursor-pointer" />
       </template>
     </q-input>
@@ -21,15 +22,6 @@
 
 <script>
 export default {
-  props: ['name'],
-  data () {
-    return {
-      propName: this.name
-    }
-  }
+  props: ['name']
 }
 </script>
-
-<style>
-
-</style>

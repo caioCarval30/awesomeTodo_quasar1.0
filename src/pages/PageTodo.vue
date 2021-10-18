@@ -1,17 +1,11 @@
 <template>
   <q-page padding>
-    <q-list
-      v-if="Object.keys(tasks).length"
-      separator
-      bordered>
 
-      <task
-        v-for="(task, key) in tasks"
-        :key="key"
-        :task="task"
-        :id="key"></task>
+    <tasksTodo
+      :tasksTodo="tasksTodo" />
 
-    </q-list>
+    <tasksCompleted
+      :tasksCompleted="tasksCompleted" />
 
     <div class="absolute-bottom text-center q-mb-xl">
       <q-btn
@@ -25,7 +19,7 @@
     </div>
 
     <q-dialog v-model="showAddTask">
-      <addTask @closeAddTask="showAddTask = false" />
+      <addTask @close="showAddTask = false" />
     </q-dialog>
 
   </q-page>
@@ -41,11 +35,12 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('tasks', ['tasks'])
+    ...mapGetters('tasks', ['tasksTodo', 'tasksCompleted'])
   },
   components: {
-    task: require('components/Tasks/Task.vue').default,
-    addTask: require('components/Tasks/Modals/AddTask.vue').default
+    addTask: require('components/Tasks/Modals/AddTask.vue').default,
+    tasksTodo: require('components/Tasks/TasksTodo.vue').default,
+    tasksCompleted: require('components/Tasks/TasksCompleted.vue').default
   }
 }
 </script>

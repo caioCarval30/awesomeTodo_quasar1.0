@@ -1,11 +1,13 @@
 <template>
   <q-item
-    @click="updateTask({ id: id, updates: { completed: !task.completed }  })"
+    @click="updateTask({ id: id, updates: { completed: !task.completed } })"
     :class="!task.completed ? 'bg-orange-2' : 'bg-green-3'"
     clickable
     v-ripple>
     <q-item-section side top>
-      <q-checkbox :value="task.completed" @input="updateTask({ id: id, updates: { completed: !task.completed } })" />
+      <q-checkbox
+        :value="task.completed"
+        @input="updateTask({ id: id, updates: { completed: !task.completed } })" />
     </q-item-section>
 
     <q-item-section>
@@ -38,14 +40,30 @@
     </q-item-section>
 
     <q-item-section side>
-      <q-btn
-        @click.stop="promptToDelete(id)"
-        flat
-        round
-        dense
-        color="negative"
-        icon="delete" />
+      <div class="row">
+        <q-btn
+          @click.stop="showEditTask = true"
+          flat
+          round
+          dense
+          color="blue-8"
+          icon="edit" />
+        <q-btn
+          @click.stop="promptToDelete(id)"
+          flat
+          round
+          dense
+          color="negative"
+          icon="delete" />
+      </div>
     </q-item-section>
+
+    <q-dialog v-model="showEditTask">
+      <editTask
+        @close="showEditTask = false"
+        :task="task"
+        :id="id" />
+    </q-dialog>
 
   </q-item>
 </template>
@@ -55,6 +73,11 @@ import { mapActions } from 'vuex'
 
 export default {
   props: ['task', 'id'],
+  data () {
+    return {
+      showEditTask: false
+    }
+  },
   methods: {
     ...mapActions('tasks', ['updateTask', 'deleteTask']),
     promptToDelete (id) {
@@ -70,6 +93,9 @@ export default {
         this.deleteTask(id)
       })
     }
+  },
+  components: {
+    editTask: require('components/Tasks/Modals/EditTask.vue').default
   }
 }
 </script>
