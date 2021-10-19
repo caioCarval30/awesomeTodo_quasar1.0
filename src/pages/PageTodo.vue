@@ -1,10 +1,15 @@
 <template>
   <q-page padding>
 
+    <noTasks
+      v-if="!Object.keys(tasksTodo).length" />
+
     <tasksTodo
+      v-else
       :tasksTodo="tasksTodo" />
 
     <tasksCompleted
+      v-if="Object.keys(tasksCompleted).length"
       :tasksCompleted="tasksCompleted" />
 
     <div class="absolute-bottom text-center q-mb-xl">
@@ -40,7 +45,13 @@ export default {
   components: {
     addTask: require('components/Tasks/Modals/AddTask.vue').default,
     tasksTodo: require('components/Tasks/TasksTodo.vue').default,
-    tasksCompleted: require('components/Tasks/TasksCompleted.vue').default
+    tasksCompleted: require('components/Tasks/TasksCompleted.vue').default,
+    noTasks: require('components/Tasks/NoTasks.vue').default
+  },
+  mounted () {
+    this.$root.$on('showAddTask', () => {
+      this.showAddTask = true
+    })
   }
 }
 </script>

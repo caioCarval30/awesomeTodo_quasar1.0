@@ -1,10 +1,9 @@
 <template>
   <div>
-
     <listHeader
       bgColor="bg-orange-6">Todo</listHeader>
+
     <q-list
-      v-if="Object.keys(tasksTodo).length"
       separator
       bordered>
 
