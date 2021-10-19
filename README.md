@@ -12,11 +12,6 @@ npm install
 quasar dev
 ```
 
-### Lint the files
-```bash
-yarn run lint
-```
-
 ### Build the app for production
 ```bash
 quasar build
