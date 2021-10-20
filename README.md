@@ -4,7 +4,7 @@ O software aplicativo Awesome-Todo funciona como uma agenda pessoal, onde o usu�
 \
 \
 • Desenvolvido utilizando Quasar 1.0^ e VueJS2.0^\
-• Concluído durante estágio - PRODEPA
+• Projeto concluído durante estágio - PRODEPA
 
 ## Install the dependencies
 ```bash
